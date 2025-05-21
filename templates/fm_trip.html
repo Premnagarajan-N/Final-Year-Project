@@ -1,0 +1,342 @@
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Fisherman Safety</title>
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="../static/images/favicon.png">
+    <!-- Custom Stylesheet -->
+    <link href="../static/css/style.css" rel="stylesheet">
+
+
+
+</head>
+
+<body>
+
+    <!--*******************
+        Preloader start
+    ********************-->
+    <!--<div id="preloader">
+        <div class="loader">
+            <svg class="circular" viewBox="25 25 50 50">
+                <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="3" stroke-miterlimit="10" />
+            </svg>
+        </div>
+    </div>-->
+    <!--*******************
+        Preloader end
+    ********************-->
+
+    
+    <!--**********************************
+        Main wrapper start
+    ***********************************-->
+    <div id="main-wrapper">
+
+        <!--**********************************
+            Nav header start
+        ***********************************-->
+        <div class="nav-header" style="background-color:#003366">
+            <div class="brand-logo">
+                <a href="">
+				<h2 style="color:#FFFFFF">Fisher</h2>
+				
+                   <!-- <b class="logo-abbr"><img src="../static/images/logo.png" alt=""> </b>
+                    <span class="logo-compact"><img src="../static/images/logo-compact.png" alt=""></span>
+                    <span class="brand-title">
+                        <img src="../static/images/logo-text.png" alt="">
+                    </span>-->
+                </a>
+            </div>
+        </div>
+        <!--**********************************
+            Nav header end
+        ***********************************-->
+
+        <!--**********************************
+            Header start
+        ***********************************-->
+        <div class="header">    
+            <div class="header-content clearfix">
+                
+                <div class="nav-control">
+                    <div class="hamburger">
+                        <span class="toggle-icon"><i class="icon-menu"></i></span>
+                    </div>
+                </div>
+                <div class="header-left">
+				
+                   <!-- <div class="input-group icons">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text bg-transparent border-0 pr-2 pr-sm-3" id="basic-addon1"><i class="mdi mdi-magnify"></i></span>
+                        </div>
+                        <input type="search" class="form-control" placeholder="Search Dashboard" aria-label="Search Dashboard">
+                        <div class="drop-down   d-md-none">
+							<form action="#">
+								<input type="text" class="form-control" placeholder="Search">
+							</form>
+                        </div>
+                    </div>-->
+                </div>
+                <div class="header-right">
+                    <ul class="clearfix">
+                        
+                       
+                        <li class="icons dropdown">
+                            <div class="user-img c-pointer position-relative"   data-toggle="dropdown">
+                                <span class="activity active">{{rs[1]}}</span>
+                                <img src="../static/images/profile.jpg" height="40" width="40" alt="">
+                            </div>
+                            <div class="drop-down dropdown-profile   dropdown-menu">
+                                <div class="dropdown-content-body">
+                                    <ul>
+                                       
+                                        <li><a href="/logout"><i class="icon-key"></i> <span>Logout</span></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!--**********************************
+            Header end ti-comment-alt
+        ***********************************-->
+
+        <!--**********************************
+            Sidebar start
+        ***********************************-->
+        <div class="nk-sidebar">           
+            <div class="nk-nav-scroll">
+                <ul class="metismenu" id="menu">
+                    
+                   
+					<li>
+                        <a class="has-arrow" href="/fm_home" aria-expanded="false">
+                            <i class="icon-speedometer menu-icon"></i><span class="nav-text">Dashboard</span>
+                        </a>
+                        
+                    </li>
+					
+					<li>
+                        <a class="" href="/fm_trip" aria-expanded="false">
+                            <i class="icon-grid menu-icon"></i><span class="nav-text">Fishing Trip</span>
+                        </a>
+					</li>	
+				
+					
+					<li>
+                        <a class="" href="/logout" aria-expanded="false">
+                           <i class="icon-notebook menu-icon"></i><span class="nav-text">Logout</span>
+                        </a>
+					</li>	
+						
+                  
+                </ul>
+            </div>
+        </div>
+        <!--**********************************
+            Sidebar end
+        ***********************************-->
+
+        <!--**********************************
+            Content body start
+        ***********************************-->
+        <div class="content-body">
+
+            <div class="row page-titles mx-0">
+                <div class="col p-md-0">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/fm_home">Dashboard</a></li>
+                        
+                    </ol>
+                </div>
+            </div>
+            <!-- row -->
+
+            <div class="container-fluid">
+                <div class="row justify-content-center">
+                   
+					
+					 <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="active-member">
+					<h3>Trip Request</h3>
+		  			{% if msg=="success" %}
+					<span style="color:#006600">Request has sent..</span>
+					<script>
+//Using setTimeout to execute a function after 5 seconds.
+setTimeout(function () {
+   //Redirect with JavaScript
+   window.location.href= '/fm_trip';
+}, 2000);
+</script>
+					{% endif %}
+					
+					{% if msg=="trip" %}
+					<script language="javascript">
+					//window.location.href="/fm_travel?tid={{tid}}";
+					</script>
+					{% endif %}
+					
+					
+		  			<form name="form1" method="post">
+						<div class="row">
+							<div class="col-md-2">
+							Trip on
+							</div>
+							<div class="col-md-2">
+							<input type="date" name="sdate" class="form-control">
+							</div>
+							<div class="col-md-2">
+							<select name="sh" class="form-control">
+							<option value="">-Hour-</option>
+							<option>4</option>
+							<option>5</option>
+							<option>6</option>
+							<option>7</option>
+							<option>8</option>
+							<option>9</option>
+							<option>10</option>
+							<option>11</option>
+							<option>12</option>
+							<option>13</option>
+							<option>14</option>
+							<option>15</option>
+							<option>16</option>
+							<option>17</option>
+							<option>18</option>
+							</select>
+						</div>
+						<div class="col-md-2">
+						  	 <select name="sm" class="form-control">
+							<option value="">-Minute-</option>
+							
+							<option>0</option>
+							<option>5</option>
+							<option>10</option>
+							<option>15</option>
+							<option>20</option>
+							<option>25</option>
+							<option>30</option>
+							<option>35</option>
+							<option>40</option>
+							<option>45</option>
+							<option>50</option>
+							<option>55</option>
+							</select>
+							</div>
+							<div class="col-md-3">
+							<button type="submit" name="btn" class="btn btn-primary">Send</button>
+							</div>
+						</div>
+					</form>
+					
+					
+					<p>&nbsp;</p>
+					{% if s1=="1" %}
+					
+					<table class="table">
+						<tr>
+							<th>#</th>
+							<th>Trip on</th>
+							<th>End Trip</th>
+							<th>Request Status</th>
+							<th>Trip Status</th>
+						</tr>
+						{% for rs1 in data1 %}
+						<tr>
+							<td>{{loop.index}}</td>
+							<td>{{rs1[2]}} {{rs1[3]}}</td>
+							<td>{{rs1[4]}} {{rs1[5]}}</td>
+							<td>
+							{% if rs1[6]==1 %}
+							Allowed
+							{% elif rs1[6]==2 %}
+							Rejected
+							{% else %}
+							Request Sent
+							{% endif %}
+							</td>
+							<td>
+							{% if rs1[6]==1 %}
+								{% if rs1[7]==2 %}	
+									Trip End<br>
+									<a href="/fm_history?tid={{rs1[0]}}">View Trip History</a>
+								{% elif rs1[7]==1 %}
+								<a href="/fm_trip?act=trip&tid={{rs1[0]}}">Travelling</a>
+								{% else %}
+								<a href="/fm_trip?act=trip&tid={{rs1[0]}}">Start Trip</a>
+								{% endif %}
+							
+							{% else %}
+							Not Started
+							{% endif %}
+							
+							
+							</td>
+						</tr>
+						{% endfor %}
+					</table>
+					
+					{% endif %}
+					 </div>
+                            </div>
+                        </div>                        
+                    </div>
+					
+                </div>
+								
+								
+								
+                                  
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- #/ container -->
+        </div>
+        <!--**********************************
+            Content body end
+        ***********************************-->
+        
+        
+        <!--**********************************
+            Footer start
+        ***********************************-->
+        <div class="footer">
+            <div class="copyright">
+                <p>Fisherman <a href="https://themeforest.net/user/quixlab"></a> </p>
+            </div>
+        </div>
+        <!--**********************************
+            Footer end
+        ***********************************-->
+    </div>
+    <!--**********************************
+        Main wrapper end
+    ***********************************-->
+
+    <!--**********************************
+        Scripts
+    ***********************************-->
+    <script src="../static/plugins/common/common.min.js"></script>
+    <script src="../static/js/custom.min.js"></script>
+    <script src="../static/js/settings.js"></script>
+    <script src="../static/js/gleek.js"></script>
+    <script src="../static/js/styleSwitcher.js"></script>
+
+    <script src="../static/plugins/validation/jquery.validate.min.js"></script>
+    <script src="../static/plugins/validation/jquery.validate-init.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Boat Sailing in the Indian Ocean</title>
+    <style>
+        #map {
+            height: 400px;
+            width: 500px;
+        }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+    <script>
+        function initMap() {
+            // Define the bounds of the Indian Ocean
+            const indianOceanBounds = {
+                north: 0,
+                south: -35,
+                west: 50,
+                east: 115
+            };
+
+            // Create a map centered in the Indian Ocean
+            const map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 3,
+                center: { lat: -5.0, lng: 80.0 },
+                restriction: {
+                    latLngBounds: indianOceanBounds,
+                    strictBounds: false
+                }
+            });
+
+            // Create a marker for the boat
+            const boatMarker = new google.maps.Marker({
+                position: { lat: -5.0, lng: 80.0 }, // Initial position for the boat in the Indian Ocean
+                map: map,
+                icon: {
+                    url: "https://maps.google.com/mapfiles/ms/micons/sailing.png", // Boat icon
+                    scaledSize: new google.maps.Size(50, 50) // Adjust size as needed
+                }
+            });
+
+            // Animate the boat's movement
+            const deltaLat = 0.002; // Change in latitude per animation frame (adjust as needed)
+            const deltaLng = 0.002; // Change in longitude per animation frame (adjust as needed)
+            function animateBoat() {
+                // Update boat's position
+                const newPosition = {
+                    lat: boatMarker.getPosition().lat() + deltaLat,
+                    lng: boatMarker.getPosition().lng() + deltaLng
+                };
+
+                // Move the boat marker to the new position
+                boatMarker.setPosition(newPosition);
+
+                // Repeat the animation
+                requestAnimationFrame(animateBoat);
+            }
+
+            // Start the animation
+            animateBoat();
+        }
+    </script>
+    <!-- Include the Google Maps JavaScript API -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&callback=initMap" async defer></script>
+</body>
+</html>

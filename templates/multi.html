@@ -1,0 +1,287 @@
+<html>
+<head>
+    <title>Boats Sailing in the Indian Ocean</title>
+    <style>
+        #map {
+            height: 400px;
+            width: 700px;
+        }
+    </style>
+	   <link rel="icon" type="image/png" sizes="16x16" href="../static/images/favicon.png">
+    <!-- Custom Stylesheet -->
+    <link href="../static/css/style.css" rel="stylesheet">
+
+</head>
+<body>
+<div id="main-wrapper">
+
+        <!--**********************************
+            Nav header start
+        ***********************************-->
+        <div class="nav-header" style="background-color:#003366">
+            <div class="brand-logo">
+                <a href="">
+				<h2 style="color:#FFFFFF">Maritime</h2>
+				
+                   <!-- <b class="logo-abbr"><img src="../static/images/logo.png" alt=""> </b>
+                    <span class="logo-compact"><img src="../static/images/logo-compact.png" alt=""></span>
+                    <span class="brand-title">
+                        <img src="../static/images/logo-text.png" alt="">
+                    </span>-->
+                </a>
+            </div>
+        </div>
+        <!--**********************************
+            Nav header end
+        ***********************************-->
+
+        <!--**********************************
+            Header start
+        ***********************************-->
+        <div class="header">    
+            <div class="header-content clearfix">
+                
+                <div class="nav-control">
+                    <div class="hamburger">
+                        <span class="toggle-icon"><i class="icon-menu"></i></span>
+                    </div>
+                </div>
+                <div class="header-left">
+				
+                   <!-- <div class="input-group icons">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text bg-transparent border-0 pr-2 pr-sm-3" id="basic-addon1"><i class="mdi mdi-magnify"></i></span>
+                        </div>
+                        <input type="search" class="form-control" placeholder="Search Dashboard" aria-label="Search Dashboard">
+                        <div class="drop-down   d-md-none">
+							<form action="#">
+								<input type="text" class="form-control" placeholder="Search">
+							</form>
+                        </div>
+                    </div>-->
+                </div>
+                <div class="header-right">
+                    <ul class="clearfix">
+                        
+                       
+                        <li class="icons dropdown">
+                            <div class="user-img c-pointer position-relative"   data-toggle="dropdown">
+                                <span class="activity active"></span>
+                                <img src="../static/images/profile.jpg" height="40" width="40" alt="">
+                            </div>
+                            <div class="drop-down dropdown-profile   dropdown-menu">
+                                <div class="dropdown-content-body">
+                                    <ul>
+                                       
+                                        <li><a href="http://localhost:5000/logout"><i class="icon-key"></i> <span>Logout</span></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!--**********************************
+            Header end ti-comment-alt
+        ***********************************-->
+
+        <!--**********************************
+            Sidebar start
+        ***********************************-->
+        <div class="nk-sidebar">           
+            <div class="nk-nav-scroll">
+                <ul class="metismenu" id="menu">
+                    
+                   
+					<li>
+                        <a class="has-arrow" href="http://localhost:5000/auth_home" aria-expanded="false">
+                            <i class="icon-speedometer menu-icon"></i><span class="nav-text">Dashboard</span>
+                        </a>
+                        
+                    </li>
+					
+					<li>
+                        <a class="" href="http://localhost:5000/auth_request" aria-expanded="false">
+                            <i class="icon-grid menu-icon"></i><span class="nav-text">Fisher Trip Request</span>
+                        </a>
+					</li>	
+				
+					
+					<li>
+                        <a class="" href="http://localhost:5000/logout" aria-expanded="false">
+                           <i class="icon-notebook menu-icon"></i><span class="nav-text">Logout</span>
+                        </a>
+					</li>	
+						
+                  
+                </ul>
+            </div>
+        </div>
+        <!--**********************************
+            Sidebar end
+        ***********************************-->
+
+        <!--**********************************
+            Content body start
+        ***********************************-->
+        <div class="content-body">
+
+            <div class="row page-titles mx-0">
+                <div class="col p-md-0">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="http://localhost:5000/auth_home">Dashboard</a></li>
+                        
+                    </ol>
+                </div>
+            </div>
+            <!-- row -->
+
+            <div class="container-fluid">
+                <div class="row justify-content-center">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="form-validation">
+								
+								  
+							Maritime Authority
+								  
+								  
+								  
+								  
+                                </div>
+                            </div>
+                        </div>                        
+                    </div>
+					
+					 <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="active-member" align="center">
+    <div id="map"></div>
+    <script>
+        function initMap() {
+            // Define the bounds of the Indian Ocean
+            const indianOceanBounds = {
+                north: 0,
+                south: -35,
+                west: 50,
+                east: 115
+            };
+
+            // Create a map centered in the Indian Ocean
+            const map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 3,
+                center: { lat: -5.0, lng: 80.0 },
+                restriction: {
+                    latLngBounds: indianOceanBounds,
+                    strictBounds: false
+                }
+            });
+
+            // Boat data
+            const boats = [
+                { id: 1, name: "Boat 1", position: { lat: -5.0, lng: 80.0 }, deltaLat: 0.002, deltaLng: 0.002 },
+                { id: 2, name: "Boat 2", position: { lat: -6.0, lng: 81.0 }, deltaLat: 0.003, deltaLng: 0.003 },
+                { id: 3, name: "Boat 3", position: { lat: -4.5, lng: 79.5 }, deltaLat: 0.004, deltaLng: 0.004 }
+            ];
+
+            // Array to store boat markers
+            const boatMarkers = [];
+
+            // Create markers for each boat
+            boats.forEach((boat, index) => {
+                const boatMarker = new google.maps.Marker({
+                    position: boat.position,
+                    map: map,
+                    title: `Boat ID: ${boat.id}, Name: ${boat.name}`,
+                    icon: {
+                        url: "https://maps.google.com/mapfiles/ms/micons/sailing.png",
+                        scaledSize: new google.maps.Size(50, 50)
+                    }
+                });
+
+                // Store boat marker in array
+                boatMarkers.push({ marker: boatMarker, deltaLat: boat.deltaLat, deltaLng: boat.deltaLng });
+
+                // Animate boat's movement
+                animateBoat(boatMarkers[index]);
+            });
+        }
+
+        // Function to animate boat's movement
+        function animateBoat(boat) {
+            function moveBoat() {
+                const newPosition = {
+                    lat: boat.marker.getPosition().lat() + boat.deltaLat,
+                    lng: boat.marker.getPosition().lng() + boat.deltaLng
+                };
+
+                // Check if the new position is within the Indian Ocean bounds
+                if (newPosition.lat < 0 && newPosition.lat > -35 && newPosition.lng > 50 && newPosition.lng < 115) {
+                    boat.marker.setPosition(newPosition);
+                }
+
+                requestAnimationFrame(moveBoat);
+            }
+
+            moveBoat();
+        }
+    </script>
+    <!-- Include the Google Maps JavaScript API -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&callback=initMap&libraries=geometry" async defer></script>
+	
+		 </div>
+                            </div>
+                        </div>                        
+                    </div>
+					
+                </div>
+							<p></p>	
+						<p align="center"><iframe src="http://localhost/fisher/travel.php" width="500" height="400" frameborder="0"></iframe></p>		
+								
+                                  
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- #/ container -->
+        </div>
+        <!--**********************************
+            Content body end
+        ***********************************-->
+        
+        
+        <!--**********************************
+            Footer start
+        ***********************************-->
+        <div class="footer">
+            <div class="copyright">
+                <p>Fisherman <a href="https://themeforest.net/user/quixlab"></a> </p>
+            </div>
+        </div>
+        <!--**********************************
+            Footer end
+        ***********************************-->
+    </div>
+    <!--**********************************
+        Main wrapper end
+    ***********************************-->
+
+    <!--**********************************
+        Scripts
+    ***********************************-->
+    <script src="../static/plugins/common/common.min.js"></script>
+    <script src="../static/js/custom.min.js"></script>
+    <script src="../static/js/settings.js"></script>
+    <script src="../static/js/gleek.js"></script>
+    <script src="../static/js/styleSwitcher.js"></script>
+
+    <script src="../static/plugins/validation/jquery.validate.min.js"></script>
+    <script src="../static/plugins/validation/jquery.validate-init.js"></script>
+</body>
+</html>

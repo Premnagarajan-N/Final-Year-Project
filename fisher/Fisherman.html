@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Boat Sailing in the Indian Ocean</title>
+    <style>
+        #map {
+            height: 400px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+    <script>
+        function initMap() {
+            // Create a map centered in the Indian Ocean
+            const map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 8,
+                center: { lat: 12.738352, lng: 80.474805 },
+            });
+
+            // Create a marker for the boat
+            const boatMarker = new google.maps.Marker({
+                position: { lat: -5.0, lng: 80.0 }, // Starting position for the boat in the Indian Ocean
+                map: map,
+                icon: {
+                    url: "https://maps.google.com/mapfiles/ms/micons/sailing.png", // Boat icon
+                    scaledSize: new google.maps.Size(50, 50), // Adjust size as needed
+                },
+            });
+
+            // Animate the boat's movement
+            const deltaLat = 0.01; // Change in latitude per animation frame (adjust as needed)
+            const deltaLng = 0.01; // Change in longitude per animation frame (adjust as needed)
+            let boatPosition = { lat: 12.738352, lng: 80.474805 }; // Initial position
+            function animateBoat() {
+                // Update boat's position
+                boatPosition.lat += deltaLat;
+                boatPosition.lng += deltaLng;
+
+                // Move the boat marker to the new position
+                boatMarker.setPosition(boatPosition);
+
+                // Repeat the animation
+                requestAnimationFrame(animateBoat);
+            }
+
+            // Start the animation
+            animateBoat();
+        }
+    </script>
+    <!-- Include the Google Maps JavaScript API -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&callback=initMap" async defer></script>
+</body>
+</html>

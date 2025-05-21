@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Boats Sailing in the Indian Ocean</title>
+    <style>
+        #map {
+            height: 400px;
+            width: 400px;
+        }
+    </style>
+</head>
+<body>
+<?php
+$v=2;
+
+?>
+    <div id="map"></div>
+    <script>
+        function initMap() {
+            // Define the bounds of the Indian Ocean
+            const indianOceanBounds = {
+                north: 0,
+                south: -35,
+                west: 50,
+                east: 115
+            };
+
+            // Create a map centered in the Indian Ocean
+            const map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 3,
+                center: { lat: -5.0, lng: 80.0 },
+                restriction: {
+                    latLngBounds: indianOceanBounds,
+                    strictBounds: false
+                }
+            });
+
+            // Boat data
+            const boats = [
+				<?php
+				if($v>=3)
+				{
+				?>
+                { id: 1, name: "Boat 1", position: { lat: -5.0, lng: 80.0 }, deltaLat: 0.002, deltaLng: 0.002 },
+                { id: 2, name: "Boat 2", position: { lat: -6.0, lng: 81.0 }, deltaLat: 0.003, deltaLng: 0.003 },
+                { id: 3, name: "Boat 3", position: { lat: -4.5, lng: 79.5 }, deltaLat: 0.004, deltaLng: 0.004 }
+				<?php
+				}
+				else if($v>=2)
+				{
+				?>
+				{ id: 1, name: "Boat 1", position: { lat: -5.0, lng: 80.0 }, deltaLat: 0.002, deltaLng: 0.002 },
+                { id: 2, name: "Boat 2", position: { lat: -6.0, lng: 81.0 }, deltaLat: 0.003, deltaLng: 0.003 }
+				<?php
+				}
+				else
+				{
+				?>
+				{ id: 1, name: "Boat 1", position: { lat: -5.0, lng: 80.0 }, deltaLat: 0.002, deltaLng: 0.002 }
+				<?php
+				}
+				?>
+            ];
+
+            // Array to store boat markers
+            const boatMarkers = [];
+
+            // Create markers for each boat
+            boats.forEach((boat, index) => {
+                const boatMarker = new google.maps.Marker({
+                    position: boat.position,
+                    map: map,
+                    title: `Boat ID: ${boat.id}, Name: ${boat.name}`,
+                    icon: {
+                        url: "https://maps.google.com/mapfiles/ms/micons/sailing.png",
+                        scaledSize: new google.maps.Size(50, 50)
+                    }
+                });
+
+                // Store boat marker in array
+                boatMarkers.push({ marker: boatMarker, deltaLat: boat.deltaLat, deltaLng: boat.deltaLng });
+
+                // Animate boat's movement
+                animateBoat(boatMarkers[index]);
+            });
+        }
+
+        // Function to animate boat's movement
+        function animateBoat(boat) {
+            function moveBoat() {
+                const newPosition = {
+                    lat: boat.marker.getPosition().lat() + boat.deltaLat,
+                    lng: boat.marker.getPosition().lng() + boat.deltaLng
+                };
+
+                // Check if the new position is within the Indian Ocean bounds
+                if (newPosition.lat < 0 && newPosition.lat > -35 && newPosition.lng > 50 && newPosition.lng < 115) {
+                    boat.marker.setPosition(newPosition);
+                }
+
+                requestAnimationFrame(moveBoat);
+            }
+
+            moveBoat();
+        }
+    </script>
+    <!-- Include the Google Maps JavaScript API -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&callback=initMap&libraries=geometry" async defer></script>
+</body>
+</html>
